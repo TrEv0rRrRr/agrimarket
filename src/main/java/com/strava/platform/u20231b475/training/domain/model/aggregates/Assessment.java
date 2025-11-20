@@ -19,6 +19,7 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import lombok.Getter;
 
 /**
  * Assessment Aggregate root
@@ -28,26 +29,32 @@ import jakarta.persistence.Enumerated;
 @Entity
 public class Assessment extends AuditableAbstractAggregateRoot<Assessment> {
   @Embedded
+  @Getter
   @AttributeOverride(name = "id", column = @Column(name = "athlete_id"))
   private AthleteId athleteId;
 
   @Embedded
+  @Getter
   @AttributeOverride(name = "id", column = @Column(name = "coach_id"))
   private CoachId coachId;
 
   @Embedded
+  @Getter
   @AttributeOverride(name = "value", column = @Column(name = "bmi"))
   private BMI bmi;
 
   @Embedded
+  @Getter
   @AttributeOverride(name = "value", column = @Column(name = "push_ups"))
   private PushUpCount pushUps;
 
   @Embedded
+  @Getter
   @AttributeOverride(name = "value", column = @Column(name = "plank_time"))
   private PlankTime plankTime;
 
   @Embedded
+  @Getter
   @AttributeOverrides({
       @AttributeOverride(name = "maxHeartRate", column = @Column(name = "max_heart_rate")),
       @AttributeOverride(name = "restingHeartRate", column = @Column(name = "resting_heart_rate")),
@@ -56,13 +63,16 @@ public class Assessment extends AuditableAbstractAggregateRoot<Assessment> {
   private CardioMetrics cardioMetrics;
 
   @Embedded
+  @Getter
   @AttributeOverride(name = "encryptedText", column = @Column(name = "encrypted_text"))
   private ConfidentialNote confidentialNote;
 
   @Enumerated(EnumType.STRING)
+  @Getter
   private AssessmentType type;
 
   @Enumerated(EnumType.STRING)
+  @Getter
   private AssessmentStatus status;
 
   public Assessment() {
