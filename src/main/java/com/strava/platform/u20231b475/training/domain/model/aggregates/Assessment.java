@@ -1,10 +1,82 @@
 package com.strava.platform.u20231b475.training.domain.model.aggregates;
 
+import com.strava.platform.u20231b475.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
+import com.strava.platform.u20231b475.training.domain.model.commands.CreateAssessmentCommand;
+import com.strava.platform.u20231b475.training.domain.model.valuobjects.AssessmentStatus;
+import com.strava.platform.u20231b475.training.domain.model.valuobjects.AssessmentType;
+import com.strava.platform.u20231b475.training.domain.model.valuobjects.AthleteId;
+import com.strava.platform.u20231b475.training.domain.model.valuobjects.BMI;
+import com.strava.platform.u20231b475.training.domain.model.valuobjects.CardioMetrics;
+import com.strava.platform.u20231b475.training.domain.model.valuobjects.CoachId;
+import com.strava.platform.u20231b475.training.domain.model.valuobjects.ConfidentialNote;
+import com.strava.platform.u20231b475.training.domain.model.valuobjects.PlankTime;
+import com.strava.platform.u20231b475.training.domain.model.valuobjects.PushUpCount;
+
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+
 /**
  * Assessment Aggregate root
  * 
  * @author Valentino Solis
  */
-public class Assessment {
+@Entity
+public class Assessment extends AuditableAbstractAggregateRoot<Assessment> {
+  @Embedded
+  @AttributeOverride(name = "id", column = @Column(name = "athlete_id"))
+  private AthleteId athleteId;
 
+  @Embedded
+  @AttributeOverride(name = "id", column = @Column(name = "coach_id"))
+  private CoachId coachId;
+
+  @Embedded
+  @AttributeOverride(name = "value", column = @Column(name = "bmi"))
+  private BMI bmi;
+
+  @Embedded
+  @AttributeOverride(name = "value", column = @Column(name = "push_ups"))
+  private PushUpCount pushUps;
+
+  @Embedded
+  @AttributeOverride(name = "value", column = @Column(name = "plank_time"))
+  private PlankTime plankTime;
+
+  @Embedded
+  @AttributeOverrides({
+      @AttributeOverride(name = "maxHeartRate", column = @Column(name = "max_heart_rate")),
+      @AttributeOverride(name = "restingHeartRate", column = @Column(name = "resting_heart_rate")),
+      @AttributeOverride(name = "vo2max", column = @Column(name = "vo2_max"))
+  })
+  private CardioMetrics cardioMetrics;
+
+  @Embedded
+  @AttributeOverride(name = "encryptedText", column = @Column(name = "encrypted_text"))
+  private ConfidentialNote confidentialNote;
+
+  @Enumerated(EnumType.STRING)
+  private AssessmentType type;
+
+  @Enumerated(EnumType.STRING)
+  private AssessmentStatus status;
+
+  public Assessment() {
+  }
+
+  public Assessment(CreateAssessmentCommand command) {
+    this.athleteId = new AthleteId(command.athleteId());
+    this.coachId = new CoachId(command.coachId());
+    this.bmi = new BMI(command.bmi());
+    this.pushUps = new PushUpCount(command.pushUps());
+    this.plankTime = new PlankTime(command.plankTime());
+    this.cardioMetrics = new CardioMetrics(command.maxHeartRate(), command.restingHeartRate(), command.vo2max());
+    this.confidentialNote = new ConfidentialNote(command.encryptedText());
+    this.type = command.type();
+    this.status = AssessmentStatus.RECORDED;
+  }
 }
