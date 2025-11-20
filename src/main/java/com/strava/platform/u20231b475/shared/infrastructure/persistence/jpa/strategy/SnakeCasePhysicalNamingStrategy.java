@@ -1,4 +1,4 @@
-package com.agrimarket.platform.u20231b475.shared.infrastructure.persistence.jpa.strategy;
+package com.strava.platform.u20231b475.shared.infrastructure.persistence.jpa.strategy;
 
 import org.hibernate.boot.model.naming.Identifier;
 import org.hibernate.boot.model.naming.PhysicalNamingStrategy;

@@ -10,11 +10,11 @@
         <relativePath />
         <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.agrimarket.platform</groupId>
-    <artifactId>agrimarket</artifactId>
+    <groupId>com.strava.platform</groupId>
+    <artifactId>strava</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>agrimarket</name>
-    <description>agrimarket</description>
+    <name>strava</name>
+    <description>strava</description>
     <url />
     <licenses>
         <license />

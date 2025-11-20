@@ -1,4 +1,4 @@
-package com.agrimarket.platform.u20231b475.shared.interfaces.rest;
+package com.strava.platform.u20231b475.shared.interfaces.rest;
 
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
