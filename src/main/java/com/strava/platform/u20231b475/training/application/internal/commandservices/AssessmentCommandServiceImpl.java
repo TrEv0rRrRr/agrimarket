@@ -3,6 +3,8 @@ package com.strava.platform.u20231b475.training.application.internal.commandserv
 import java.time.LocalDate;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.strava.platform.u20231b475.training.domain.model.aggregates.Assessment;
 import com.strava.platform.u20231b475.training.domain.model.commands.CreateAssessmentCommand;
 import com.strava.platform.u20231b475.training.domain.model.valuobjects.AthleteId;
@@ -15,6 +17,7 @@ import com.strava.platform.u20231b475.training.infrastructure.persistence.jpa.re
  * 
  * @author Valentino Solis
  */
+@Service
 public class AssessmentCommandServiceImpl implements AssessmentCommandService {
   private final AssessmentRepository repository;
 

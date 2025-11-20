@@ -2,6 +2,8 @@ package com.strava.platform.u20231b475.training.application.internal.queryservic
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.strava.platform.u20231b475.training.domain.model.aggregates.Assessment;
 import com.strava.platform.u20231b475.training.domain.model.queries.GetAssessmentByAthleteIdAndCoachIdAndDateQuery;
 import com.strava.platform.u20231b475.training.domain.services.AssessmentQueryService;
@@ -12,6 +14,7 @@ import com.strava.platform.u20231b475.training.infrastructure.persistence.jpa.re
  * 
  * @author Valentino Solis
  */
+@Service
 public class AssessmentQueryServiceImpl implements AssessmentQueryService {
   private final AssessmentRepository repository;
 
